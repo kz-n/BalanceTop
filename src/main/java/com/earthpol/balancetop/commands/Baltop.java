@@ -1,13 +1,14 @@
 package com.earthpol.balancetop.commands;
 
 import com.earthpol.balancetop.Main;
+import com.earthpol.balancetop.MapUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Map;
+import java.util.*;
 
 public class Baltop implements CommandExecutor {
     @Override
@@ -18,13 +19,9 @@ public class Baltop implements CommandExecutor {
             if(sender.hasPermission("earthpol.command.baltop")){
                 player.sendMessage("---------- Balance Top ----------");
                 Map<String,Double> balances = instance.data.balances();
-                int size = balances.size();
                 int i = 0;
-                String name;
-                Double balance;
-                for(Map.Entry<String, Double> entry : balances.entrySet()){
-                    name = entry.getKey();
-                    balance = entry.getValue();
+                for(Double balance : balances.values()) {
+                   String name = MapUtils.getKeyByValue(balances, balance);
                     i++;
                     player.sendMessage( i + ". " + name + ": " + balance.toString());
                 }
