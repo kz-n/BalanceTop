@@ -1,7 +1,7 @@
 package com.earthpol.balancetop.commands;
 
 import com.earthpol.balancetop.Main;
-import com.earthpol.balancetop.MapUtils;
+import com.earthpol.balancetop.utils.MapUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,7 +18,7 @@ public class Baltop implements CommandExecutor {
             Player player = (Player) sender;
             if(sender.hasPermission("earthpol.command.baltop")){
                 player.sendMessage("§e----------[ §bBalance Top §e]----------");
-                Map<String,Double> balances = instance.data.balances();
+                Map<String,Double> balances = instance.data.cachedBalances;
                 int i = 0;
                 for(Double balance : balances.values()) {
                    String name = MapUtils.getKeyByValue(balances, balance);

@@ -10,11 +10,12 @@ import java.util.Map;
 
 public class SQLGetter {
     private final Main instance;
+    public Map<String, Double> cachedBalances = new LinkedHashMap<>();
     public SQLGetter(Main instance) {
         this.instance = instance;
     }
 
-    public Map<String,Double> balances(){
+    public void updateCachedBalances(){
         Map<String,Double> setBalances = new LinkedHashMap<>();
         try{
             PreparedStatement ps = instance.SQL.getConnection().prepareStatement("SELECT * FROM economy WHERE NOT (username LIKE '%town%') AND NOT (username LIKE '%nation%') ORDER BY balance DESC LIMIT 10");
@@ -26,6 +27,7 @@ public class SQLGetter {
         } catch(SQLException e){
             e.printStackTrace();
         }
-        return setBalances;
+        cachedBalances.clear();
+        cachedBalances.putAll(setBalances);
     }
 }

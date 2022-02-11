@@ -8,6 +8,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.SQLException;
 import java.util.Objects;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 public final class Main extends JavaPlugin {
@@ -21,6 +24,13 @@ public final class Main extends JavaPlugin {
         return instance;
     }
 
+    Runnable updateCachedBalancesRunnable = new Runnable() {
+        @Override
+        public void run() {
+            log.info("Updating cached balances.");
+            data.updateCachedBalances();
+        }
+    };
 
     @Override
     public void onEnable() {
@@ -41,6 +51,8 @@ public final class Main extends JavaPlugin {
             log.info(prefix + "§eDatabase Connection Successful");
         }
         Objects.requireNonNull(getCommand("baltop")).setExecutor(new Baltop());
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+        executor.scheduleAtFixedRate(updateCachedBalancesRunnable, 0, 3, TimeUnit.MINUTES);
     }
 
     @Override
