@@ -1,0 +1,10 @@
+name: BalanceTop
+version: '${project.version}'
+main: com.earthpol.balancetop.Main
+api-version: 1.17
+authors: [ TheCuriousMiner ]
+description: A replacement to Essentials Baltop that just goes straight into SQL.
+website: https://earthpol.com/
+commands:
+  baltop:
+    description: Displays the top 10 balances.
