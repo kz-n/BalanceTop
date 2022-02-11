@@ -17,13 +17,13 @@ public class Baltop implements CommandExecutor {
         if(sender instanceof Player) {
             Player player = (Player) sender;
             if(sender.hasPermission("earthpol.command.baltop")){
-                player.sendMessage("---------- Balance Top ----------");
+                player.sendMessage("§e----------[ §bBalance Top §e]----------");
                 Map<String,Double> balances = instance.data.balances();
                 int i = 0;
                 for(Double balance : balances.values()) {
                    String name = MapUtils.getKeyByValue(balances, balance);
                     i++;
-                    player.sendMessage( i + ". " + name + ": " + balance.toString());
+                    player.sendMessage("§e"+ i + ". §a" + name + ": §6" + balance.toString() + " G");
                 }
             }
         }
