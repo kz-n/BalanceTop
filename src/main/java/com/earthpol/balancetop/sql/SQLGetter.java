@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class SQLGetter {
@@ -15,7 +16,7 @@ public class SQLGetter {
     }
 
     public Map<String,Double> balances(){
-        Map<String,Double> setBalances = new HashMap<>();
+        Map<String,Double> setBalances = new LinkedHashMap<>();
         try{
             PreparedStatement ps = instance.SQL.getConnection().prepareStatement("SELECT * FROM economy ORDER BY balance DESC LIMIT 10");
             ResultSet rs = ps.executeQuery();
