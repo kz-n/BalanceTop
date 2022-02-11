@@ -19,14 +19,10 @@ public class SQLGetter {
         try{
             PreparedStatement ps = instance.SQL.getConnection().prepareStatement("SELECT * FROM economy ORDER BY balance DESC LIMIT 10");
             ResultSet rs = ps.executeQuery();
-            String username;
-            double balance;
             while (rs.next()){
-                username = rs.getString("username");
-                balance = rs.getDouble("balance");
-                instance.getLogger().info("Username: " + username + " | Balance: " + balance);
+                //instance.getLogger().info("Username: " + username + " | Balance: " + balance);
                 assert false;
-                setBalances.put(username, balance);
+                setBalances.put(rs.getString("username"), rs.getDouble("balance"));
             }
         } catch(SQLException e){
             e.printStackTrace();
